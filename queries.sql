@@ -26,3 +26,18 @@ select
 from instagram_posts
 group by content_category
 order by avg_engagement desc;
+
+-- Challenge 3: Highest average engagement by media_type
+
+select 
+  media_type, 
+  round(
+  avg(
+  coalesce(likes,0)
+  + coalesce(comments,0)
+  + coalesce(shares,0)
+  + coalesce(saves,0)),2) as avg_engagement,
+  count(*) as total_posts
+from instagram_posts
+group by media_type
+order by avg_engagement desc;

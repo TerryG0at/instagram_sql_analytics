@@ -11,3 +11,18 @@ select
 from instagram_posts
 order by total_engagement desc
 limit 10;
+
+-- Challenge 2: Highest average engagement by content category
+
+select 
+  content_category, 
+  round(
+  avg(
+  coalesce(likes,0)
+  + coalesce(comments,0)
+  + coalesce(shares,0)
+  + coalesce(saves,0)),2) as avg_engagement,
+  count(*) as total_posts
+from instagram_posts
+group by content_category
+order by avg_engagement desc;
